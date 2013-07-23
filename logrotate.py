@@ -49,7 +49,7 @@ while locked:
             print 'Program timeout.'
             raw_input('Enter to continue...')
             exit()
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
 my_logger.addHandler(fh)
 
