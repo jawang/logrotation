@@ -8,18 +8,24 @@ import sys
 my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.DEBUG)
 
-if len(sys.argv) < 2:
+if len(sys.argv) < 2 or len(sys.argv) > 3:
     filename = raw_input('Log file name: ')
-else:
+    try:
+        numfiles = int(raw_input('Number of files: '))
+    except Exception:
+        print 'Invalid file count.'
+        exit()
+elif len(sys.argv) == 2:
     filename = sys.argv[1]
-'''    
-try:
-    numfiles = int(raw_input('Number of files: '))
-except Exception:
-    print 'Invalid file count.'
-    exit()
-'''
-numfiles = 7
+    try:
+        numfiles = int(raw_input('Number of files: '))
+    except Exception:
+        print 'Invalid file count.'
+        exit()
+elif len(sys.argv) == 3:
+    filename = sys.argv[1]
+    numfiles = int(sys.argv[2])
+
 if not os.path.exists(filename):
     print 'Invalid file path/name.'
     exit()
