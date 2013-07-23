@@ -30,12 +30,17 @@ except Exception:
     print 'Cannot open file. Be sure no other program is using it.'
     exit()
 '''
-try:
-    fh = lh.RotatingFileHandler(filename,
-                        backupCount=numfiles)
-except Exception:
-    print 'Cannot open file. Be sure no other program is using it.'
-    exit()
+
+locked = True
+
+while locked:
+    try:
+        fh = lh.RotatingFileHandler(filename,
+                            backupCount=numfiles)
+        locked = False
+    except Exception:
+        print 'Cannot open file. Be sure no other program is using it.'
+        locked = True
 
 my_logger.addHandler(fh)
 fh.doRollover()
